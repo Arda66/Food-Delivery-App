@@ -231,6 +231,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-Medium',
     fontSize: 14,
     marginTop: 10,
+    color: colors.textDark,
   },
   categorySelectWrapper: {
     backgroundColor: 'white',

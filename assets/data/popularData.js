@@ -2,7 +2,7 @@ const popularData = [
   {
     id: '1',
     image: require('../images/pizza1.png'),
-    title: 'Primavera Pizza',
+    title: 'Pepperoni Pizza',
     weight: '540 gr',
     rating: '5.0',
     price: 4.99,
@@ -36,7 +36,7 @@ const popularData = [
   {
     id: '2',
     image: require('../images/pizza2.png'),
-    title: 'Primavera Pizza',
+    title: 'Margarita Pizza',
     weight: '450 gr',
     rating: '4.0',
     price: 5.99,
@@ -60,7 +60,7 @@ const popularData = [
   {
     id: '3',
     image: require('../images/pizza3.png'),
-    title: 'Pepperoni Pizza',
+    title: 'Vegan Pizza',
     weight: '700 gr',
     rating: '5.0',
     price: 9.99,
