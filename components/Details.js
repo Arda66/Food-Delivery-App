@@ -11,13 +11,12 @@ import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../assets/colors/colors';
-import popularData from '../assets/data/popularData';
 const Details = ({navigation, route}) => {
   const {item} = route.params;
   const renderDetailsItem = ({item}) => {
     return (
       <View style={styles.IngredientsCardItem}>
-        <Image source={item.image} />
+        <Image style={styles.ingredientsImage} source={item.image} />
       </View>
     );
   };
@@ -50,8 +49,8 @@ const Details = ({navigation, route}) => {
             <Text style={styles.SubTitleLightText}>Delivery in</Text>
             <Text style={styles.SubTitleDarkText}>{item.deliveryTime} min</Text>
           </View>
-          <View style={styles.pizzaImage}>
-            <Image source={item.image} />
+          <View style={styles.pizzaImageWrapper}>
+            <Image style={styles.pizzaImage} source={item.image} />
           </View>
         </View>
       </View>
@@ -142,9 +141,14 @@ const styles = StyleSheet.create({
   productMiddleLeft: {
     paddingLeft: 20,
   },
-  pizzaImage: {
-    marginLeft: 40,
+  pizzaImageWrapper: {
     alignSelf: 'center',
+    marginLeft: 40,
+  },
+  pizzaImage: {
+    resizeMode: 'contain',
+    width: 250,
+    height: 150,
   },
   SubTitleDarkText: {
     fontFamily: 'Montserrat-SemiBold',
@@ -170,8 +174,13 @@ const styles = StyleSheet.create({
   IngredientsListWrapper: {
     paddingVertical: 20,
   },
+  ingredientsImage: {
+    width: 82,
+    height: 85,
+  },
   IngredientsCardItem: {
     marginRight: 15,
+    bottom: 2,
     backgroundColor: colors.white,
     borderRadius: 15,
     justifyContent: 'center',
@@ -184,7 +193,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.05,
     shadowRadius: 10,
-    elevation: 2,
+    elevation: 3,
   },
   buttonText: {
     marginRight: 10,

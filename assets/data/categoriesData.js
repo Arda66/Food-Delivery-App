@@ -17,6 +17,12 @@ const categoriesData = [
     title: 'Soft Drinks',
     selected: false,
   },
+  {
+    id: '4',
+    image: require('../images/dessert-icon.png'),
+    title: 'Desserts',
+    selected: false,
+  },
 ];
 
 export default categoriesData;

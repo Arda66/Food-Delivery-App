@@ -9,7 +9,7 @@ const popularData = [
     sizeName: 'Medium',
     sizeNumber: 14,
     crust: 'Thin Crust',
-    deliveryTime: 30,
+    deliveryTime: 20,
     ingredients: [
       {
         id: '1',
@@ -43,7 +43,7 @@ const popularData = [
     sizeName: 'Small',
     sizeNumber: 10,
     crust: 'Thick Crust',
-    deliveryTime: 40,
+    deliveryTime: 30,
     ingredients: [
       {
         id: '1',
@@ -78,6 +78,74 @@ const popularData = [
         id: '2',
         name: 'cheese',
         image: require('../images/cheese.png'),
+      },
+    ],
+  },
+  {
+    id: '4',
+    image: require('../images/pizza4.png'),
+    title: 'Special Pizza',
+    weight: '900 gr',
+    rating: '5.0',
+    price: 12.99,
+    sizeName: 'Extra Large',
+    sizeNumber: 20,
+    crust: 'Thick Parmesan Crust',
+    deliveryTime: 40,
+    ingredients: [
+      {
+        id: '1',
+        name: 'tomato',
+        image: require('../images/tomato.png'),
+      },
+      {
+        id: '2',
+        name: 'olive',
+        image: require('../images/olive.png'),
+      },
+      {
+        id: '3',
+        name: 'cheese',
+        image: require('../images/cheese.png'),
+      },
+      {
+        id: '4',
+        name: 'ham',
+        image: require('../images/ham.png'),
+      },
+    ],
+  },
+  {
+    id: '5',
+    image: require('../images/pizza5.png'),
+    title: 'Full Mixed Pizza',
+    weight: '1000 gr',
+    rating: '5.0',
+    price: 19.99,
+    sizeName: 'XXL',
+    sizeNumber: 25,
+    crust: 'Thick Crust',
+    deliveryTime: 50,
+    ingredients: [
+      {
+        id: '1',
+        name: 'tomato',
+        image: require('../images/tomato.png'),
+      },
+      {
+        id: '2',
+        name: 'olive',
+        image: require('../images/olive.png'),
+      },
+      {
+        id: '3',
+        name: 'cheese',
+        image: require('../images/cheese.png'),
+      },
+      {
+        id: '4',
+        name: 'ham',
+        image: require('../images/ham.png'),
       },
     ],
   },

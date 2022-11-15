@@ -49,19 +49,19 @@ const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
       {/* Header */}
+      <SafeAreaView>
+        <View style={styles.headerWrapper}>
+          <Image
+            source={require('../assets/images/profile.png')}
+            style={styles.profileImage}
+          />
+          <Feather name="menu" size={24} color={colors.black} />
+        </View>
+      </SafeAreaView>
+      {/* Titles */}
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}>
-        <SafeAreaView>
-          <View style={styles.headerWrapper}>
-            <Image
-              source={require('../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-            <Feather name="menu" size={24} color={colors.black} />
-          </View>
-        </SafeAreaView>
-        {/* Titles */}
         <View style={styles.titlesWrapper}>
           <Text style={styles.titlesSubtitle}>Food</Text>
           <Text style={styles.titlesTitle}>Delivery</Text>
@@ -78,6 +78,7 @@ const Home = ({navigation}) => {
           <Text style={styles.categoriesTitle}>Categories</Text>
           <View style={styles.categoriesListWrapper}>
             <FlatList
+              showsHorizontalScrollIndicator={false}
               data={categoriesData}
               renderItem={renderCategoryItem}
               keyExtractor={item => item.id}
@@ -99,6 +100,7 @@ const Home = ({navigation}) => {
                   styles.popularCardWrapper,
                   {
                     marginTop: item.id == 1 ? 10 : 20,
+                    marginBottom: item.id == popularData.length ? 20 : 0, // last item
                   },
                 ]}>
                 <View>
@@ -161,6 +163,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 40,
+    bottom: 5,
   },
   titlesWrapper: {
     marginTop: 30,
@@ -210,6 +213,7 @@ const styles = StyleSheet.create({
   },
   categoryItemWrapper: {
     marginRight: 20,
+    bottom: 2,
     borderRadius: 20,
     alignItems: 'center',
     shadowColor: colors.black,
@@ -219,7 +223,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.05,
     shadowRadius: 10,
-    elevation: 2,
+    elevation: 3,
   },
   categoryItemImage: {
     width: 60,
