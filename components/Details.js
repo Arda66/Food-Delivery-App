@@ -36,8 +36,8 @@ const Details = ({navigation, route}) => {
       </View>
       {/* Product Information */}
       <View>
-        <Text style={styles.pizzaTitle}>{item.title}</Text>
-        <Text style={styles.pizzaPrice}>${item.price}</Text>
+        <Text style={styles.productTitle}>{item.title}</Text>
+        <Text style={styles.productPrice}>${item.price}</Text>
         <View style={styles.productMiddleWrapper}>
           <View style={styles.productMiddleLeft}>
             <Text style={styles.SubTitleLightText}>Size</Text>
@@ -49,8 +49,8 @@ const Details = ({navigation, route}) => {
             <Text style={styles.SubTitleLightText}>Delivery in</Text>
             <Text style={styles.SubTitleDarkText}>{item.deliveryTime} min</Text>
           </View>
-          <View style={styles.pizzaImageWrapper}>
-            <Image style={styles.pizzaImage} source={item.image} />
+          <View style={styles.ProductWrapper}>
+            <Image style={styles.ProductImage} source={item.image} />
           </View>
         </View>
       </View>
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.primary,
   },
-  pizzaTitle: {
+  productTitle: {
     marginTop: 30,
     paddingLeft: 20,
     fontFamily: 'Montserrat-Bold',
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     width: '50%',
     fontSize: 32,
   },
-  pizzaPrice: {
+  productPrice: {
     color: colors.price,
     fontFamily: 'Montserrat-SemiBold',
     fontSize: 32,
@@ -141,11 +141,11 @@ const styles = StyleSheet.create({
   productMiddleLeft: {
     paddingLeft: 20,
   },
-  pizzaImageWrapper: {
+  ProductWrapper: {
     alignSelf: 'center',
     marginLeft: 40,
   },
-  pizzaImage: {
+  ProductImage: {
     resizeMode: 'contain',
     width: 250,
     height: 150,

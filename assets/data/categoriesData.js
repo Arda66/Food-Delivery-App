@@ -7,20 +7,26 @@ const categoriesData = [
   },
   {
     id: '2',
+    image: require('../images/hamburger-icon.png'),
+    title: 'Hamburger',
+    selected: false,
+  },
+  {
+    id: '3',
     image: require('../images/shrimp-icon.png'),
     title: 'Seafood',
     selected: false,
   },
   {
-    id: '3',
-    image: require('../images/soda-icon.png'),
-    title: 'Soft Drinks',
+    id: '4',
+    image: require('../images/dessert-icon.png'),
+    title: 'Dessert',
     selected: false,
   },
   {
-    id: '4',
-    image: require('../images/dessert-icon.png'),
-    title: 'Desserts',
+    id: '5',
+    image: require('../images/soda-icon.png'),
+    title: 'Soft Drinks',
     selected: false,
   },
 ];

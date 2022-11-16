@@ -1,10 +1,10 @@
-const popularData = [
+const pizzaData = [
   {
     id: '1',
     image: require('../images/pizza1.png'),
     title: 'Pepperoni Pizza',
     weight: '540 gr',
-    rating: '5.0',
+    rating: '4.5',
     price: 4.99,
     sizeName: 'Medium',
     sizeNumber: 14,
@@ -62,7 +62,7 @@ const popularData = [
     image: require('../images/pizza3.png'),
     title: 'Vegan Pizza',
     weight: '700 gr',
-    rating: '5.0',
+    rating: '4.7',
     price: 9.99,
     sizeName: 'Large',
     sizeNumber: 18,
@@ -86,7 +86,7 @@ const popularData = [
     image: require('../images/pizza4.png'),
     title: 'Special Pizza',
     weight: '900 gr',
-    rating: '5.0',
+    rating: '4.8',
     price: 12.99,
     sizeName: 'Extra Large',
     sizeNumber: 20,
@@ -151,4 +151,4 @@ const popularData = [
   },
 ];
 
-export default popularData;
+export default pizzaData;
