@@ -18,11 +18,12 @@ import SeafoodData from '../assets/data/SeafoodData';
 import HamburgerData from '../assets/data/HamburgerData';
 import DessertData from '../assets/data/DessertData';
 import SoftDrinkData from '../assets/data/SoftDrinkData';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Home = ({navigation}) => {
   const [FlatlistRenderer, setFlatlistRenderer] = useState(false);
   const [SelectedCategory, setSelectedCategory] = useState('Pizza');
   const [tempData, setTempData] = useState(PizzaData);
+  global.FavoriteData = [];
   const CategoryItemPress = item => {
     item.selected = true;
     setSelectedCategory(item.title);
@@ -33,7 +34,12 @@ const Home = ({navigation}) => {
     });
     setFlatlistRenderer(!FlatlistRenderer);
   };
-
+  // useEffect(() => {
+  //   AsyncStorage.removeItem('FavoriteData');
+  // }, []);
+  useEffect(() => {
+    GetData();
+  }, []);
   useEffect(() => {
     switch (SelectedCategory) {
       case 'Pizza':
@@ -53,7 +59,13 @@ const Home = ({navigation}) => {
         return;
     }
   }, [FlatlistRenderer]);
-
+  const GetData = () => {
+    AsyncStorage.getItem('FavoriteData').then(value => {
+      if (value !== null) {
+        FavoriteData = JSON.parse(value);
+      }
+    });
+  };
   const renderCategoryItem = ({item}) => {
     return (
       <TouchableOpacity onPress={() => CategoryItemPress(item)}>
@@ -106,8 +118,21 @@ const Home = ({navigation}) => {
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}>
         <View style={styles.titlesWrapper}>
-          <Text style={styles.titlesSubtitle}>Food</Text>
-          <Text style={styles.titlesTitle}>Delivery</Text>
+          <View>
+            <Text style={styles.titlesSubtitle}>Food</Text>
+            <Text style={styles.titlesTitle}>Menu</Text>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
+            <View style={styles.titlesFavoriteWrapper}>
+              <Text style={styles.titlesFavorite}>Favorites</Text>
+              <MaterialCommunityIcons
+                style={styles.titlesFavoriteIcon}
+                name="heart"
+                size={36}
+                color={colors.secondary}
+              />
+            </View>
+          </TouchableOpacity>
         </View>
         {/* Search */}
         <View style={styles.searchWrapper}>
@@ -118,7 +143,7 @@ const Home = ({navigation}) => {
         </View>
         {/* Categories */}
         <View style={styles.categoriesWrapper}>
-          <Text style={styles.categoriesTitle}>Categories</Text>
+          <Text style={styles.categoriesTitle}>Food Categories</Text>
           <View style={styles.categoriesListWrapper}>
             <FlatList
               extraData={FlatlistRenderer}
@@ -132,7 +157,7 @@ const Home = ({navigation}) => {
         </View>
         {/* Popular */}
         <View style={styles.popularWrapper}>
-          <Text style={styles.popularTitle}>Popular</Text>
+          <Text style={styles.popularTitle}>Popular Food</Text>
           {tempData &&
             tempData.map(item => (
               <TouchableOpacity
@@ -144,7 +169,7 @@ const Home = ({navigation}) => {
                   style={[
                     styles.popularCardWrapper,
                     {
-                      marginTop: item.id == 1 ? 10 : 20,
+                      marginTop: item.id == 1 ? 15 : 20,
                       marginBottom: item.id == tempData.length ? 20 : 0, // last item
                     },
                   ]}>
@@ -222,6 +247,9 @@ const styles = StyleSheet.create({
   titlesWrapper: {
     marginTop: 30,
     paddingHorizontal: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   titlesSubtitle: {
     fontFamily: 'Montserrat-Regular',
@@ -233,6 +261,17 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: colors.textDark,
     marginTop: 5,
+  },
+  titlesFavoriteWrapper: {
+    marginLeft: 10,
+  },
+  titlesFavorite: {
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 18,
+    color: colors.secondary,
+  },
+  titlesFavoriteIcon: {
+    alignSelf: 'center',
   },
   searchWrapper: {
     flexDirection: 'row',
@@ -304,6 +343,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   popularTitle: {
+    marginTop: 10,
     fontSize: 16,
     fontFamily: 'Montserrat-Bold',
     color: 'black',

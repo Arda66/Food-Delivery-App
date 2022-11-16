@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './components/Home';
 import Details from './components/Details';
+import Favorites from './components/Favorites';
 const App = () => {
   const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const App = () => {
           name="Details"
           component={Details}
         />
+        <Stack.Screen name="Favorites" component={Favorites} />
       </Stack.Navigator>
     </NavigationContainer>
   );

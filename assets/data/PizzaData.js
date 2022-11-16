@@ -1,7 +1,7 @@
-const pizzaData = [
+const PizzaData = [
   {
     id: '1',
-    image: require('../images/pizza1.png'),
+    image: require('../images/pizzaImages/pizza1.png'),
     title: 'Pepperoni Pizza',
     weight: '540 gr',
     rating: '4.5',
@@ -14,28 +14,28 @@ const pizzaData = [
       {
         id: '1',
         name: 'ham',
-        image: require('../images/ham.png'),
+        image: require('../images/pizzaImages/ham.png'),
       },
       {
         id: '2',
         name: 'tomato',
-        image: require('../images/tomato.png'),
+        image: require('../images/pizzaImages/tomato.png'),
       },
       {
         id: '3',
         name: 'cheese',
-        image: require('../images/cheese.png'),
+        image: require('../images/pizzaImages/cheese.png'),
       },
       {
         id: '4',
         name: 'garlic',
-        image: require('../images/garlic.png'),
+        image: require('../images/pizzaImages/garlic.png'),
       },
     ],
   },
   {
     id: '2',
-    image: require('../images/pizza2.png'),
+    image: require('../images/pizzaImages/pizza2.png'),
     title: 'Margarita Pizza',
     weight: '450 gr',
     rating: '4.0',
@@ -48,18 +48,18 @@ const pizzaData = [
       {
         id: '1',
         name: 'cheese',
-        image: require('../images/cheese.png'),
+        image: require('../images/pizzaImages/cheese.png'),
       },
       {
         id: '2',
         name: 'garlic',
-        image: require('../images/garlic.png'),
+        image: require('../images/pizzaImages/garlic.png'),
       },
     ],
   },
   {
     id: '3',
-    image: require('../images/pizza3.png'),
+    image: require('../images/pizzaImages/pizza3.png'),
     title: 'Vegan Pizza',
     weight: '700 gr',
     rating: '4.7',
@@ -72,18 +72,18 @@ const pizzaData = [
       {
         id: '1',
         name: 'tomato',
-        image: require('../images/tomato.png'),
+        image: require('../images/pizzaImages/tomato.png'),
       },
       {
         id: '2',
         name: 'cheese',
-        image: require('../images/cheese.png'),
+        image: require('../images/pizzaImages/cheese.png'),
       },
     ],
   },
   {
     id: '4',
-    image: require('../images/pizza4.png'),
+    image: require('../images/pizzaImages/pizza4.png'),
     title: 'Special Pizza',
     weight: '900 gr',
     rating: '4.8',
@@ -96,28 +96,28 @@ const pizzaData = [
       {
         id: '1',
         name: 'tomato',
-        image: require('../images/tomato.png'),
+        image: require('../images/pizzaImages/tomato.png'),
       },
       {
         id: '2',
         name: 'olive',
-        image: require('../images/olive.png'),
+        image: require('../images/pizzaImages/olive.png'),
       },
       {
         id: '3',
         name: 'cheese',
-        image: require('../images/cheese.png'),
+        image: require('../images/pizzaImages/cheese.png'),
       },
       {
         id: '4',
         name: 'ham',
-        image: require('../images/ham.png'),
+        image: require('../images/pizzaImages/ham.png'),
       },
     ],
   },
   {
     id: '5',
-    image: require('../images/pizza5.png'),
+    image: require('../images/pizzaImages/pizza5.png'),
     title: 'Full Mixed Pizza',
     weight: '1000 gr',
     rating: '5.0',
@@ -130,25 +130,25 @@ const pizzaData = [
       {
         id: '1',
         name: 'tomato',
-        image: require('../images/tomato.png'),
+        image: require('../images/pizzaImages/tomato.png'),
       },
       {
         id: '2',
         name: 'olive',
-        image: require('../images/olive.png'),
+        image: require('../images/pizzaImages/olive.png'),
       },
       {
         id: '3',
         name: 'cheese',
-        image: require('../images/cheese.png'),
+        image: require('../images/pizzaImages/cheese.png'),
       },
       {
         id: '4',
         name: 'ham',
-        image: require('../images/ham.png'),
+        image: require('../images/pizzaImages/ham.png'),
       },
     ],
   },
 ];
 
-export default pizzaData;
+export default PizzaData;

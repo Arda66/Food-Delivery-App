@@ -7,18 +7,57 @@ import {
   FlatList,
   Alert,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../assets/colors/colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Details = ({navigation, route}) => {
   const {item} = route.params;
+
+  useEffect(() => {
+    // Initialize the data
+    AsyncStorage.getItem('FavoriteData').then(value => {
+      value !== null && (FavoriteData = JSON.parse(value));
+      console.log('Value', value);
+      console.log('FavoriteData', FavoriteData);
+    });
+  }, []);
+
   const renderDetailsItem = ({item}) => {
     return (
       <View style={styles.IngredientsCardItem}>
         <Image style={styles.ingredientsImage} source={item.image} />
       </View>
     );
+  };
+
+  const AddFavorite = () => {
+    // Check if the item is already in the array
+    const isItemInArray = FavoriteData.some(
+      arrayItem => arrayItem.title === item.title,
+    );
+    if (isItemInArray) {
+      alert('Already in the favorite list');
+    } else {
+      item.id = Math.floor(Math.random() * 1000);
+      FavoriteData.push(item);
+      AsyncStorage.setItem('FavoriteData', JSON.stringify(FavoriteData));
+      Alert.alert(
+        'Added successfully!',
+        'This item has been added to favorites',
+        [
+          {
+            text: 'Go to favorites',
+            onPress: () => navigation.navigate('Favorites'),
+          },
+          {
+            text: 'Stay here',
+            onPress: () => null,
+          },
+        ],
+      );
+    }
   };
 
   return (
@@ -30,9 +69,11 @@ const Details = ({navigation, route}) => {
             <Feather name="chevron-left" size={12} color={colors.black} />
           </View>
         </TouchableOpacity>
-        <View style={styles.headerRightButton}>
-          <MaterialCommunityIcon name="star" size={12} color={colors.white} />
-        </View>
+        <TouchableOpacity onPress={() => AddFavorite()}>
+          <View style={styles.headerRightButton}>
+            <MaterialCommunityIcon name="star" size={12} color={colors.white} />
+          </View>
+        </TouchableOpacity>
       </View>
       {/* Product Information */}
       <View>
@@ -42,14 +83,17 @@ const Details = ({navigation, route}) => {
           <View style={styles.productMiddleLeft}>
             <Text style={styles.SubTitleLightText}>Size</Text>
             <Text style={styles.SubTitleDarkText}>
-              {item.sizeName} {item.sizeNumber}''
+              {item.sizeName}{' '}
+              {item.title.includes('Pizza') ? (
+                <Text>{item.sizeNumber}''</Text>
+              ) : null}
             </Text>
             <Text style={styles.SubTitleLightText}>Crust</Text>
             <Text style={styles.SubTitleDarkText}>{item.crust}</Text>
             <Text style={styles.SubTitleLightText}>Delivery in</Text>
             <Text style={styles.SubTitleDarkText}>{item.deliveryTime} min</Text>
           </View>
-          <View style={styles.ProductWrapper}>
+          <View>
             <Image style={styles.ProductImage} source={item.image} />
           </View>
         </View>
@@ -75,7 +119,7 @@ const Details = ({navigation, route}) => {
             [
               {
                 text: 'OK',
-                onPress: () => navigation.goBack(),
+                onPress: () => navigation.navigate('Home'),
               },
             ],
           );
@@ -141,11 +185,10 @@ const styles = StyleSheet.create({
   productMiddleLeft: {
     paddingLeft: 20,
   },
-  ProductWrapper: {
-    alignSelf: 'center',
-    marginLeft: 40,
-  },
+
   ProductImage: {
+    alignSelf: 'center',
+    left: 40,
     resizeMode: 'contain',
     width: 250,
     height: 150,
@@ -209,12 +252,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     backgroundColor: colors.primary,
     borderRadius: 50,
-    marginTop: 40,
     shadowColor: colors.black,
+    marginTop: 30,
     shadowOffset: {
       width: 0,
       height: 2,
     },
+    right: 0,
+    left: 0,
     shadowOpacity: 0.05,
     shadowRadius: 10,
     elevation: 2,
