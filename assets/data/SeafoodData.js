@@ -39,7 +39,7 @@ const SeafoodData = [
   {
     id: '3',
     image: require('../images/seafoodImages/fish.png'),
-    title: 'Fish',
+    title: 'Fish Grill',
     weight: '600 gr',
     rating: '4.9',
     price: 9.99,
