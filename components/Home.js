@@ -109,7 +109,7 @@ const Home = ({navigation}) => {
             source={require('../assets/images/profile.png')}
             style={styles.profileImage}
           />
-          <Feather name="menu" size={24} color={colors.black} />
+          {/* <Feather name="menu" size={24} color={colors.black} /> */}
         </View>
       </SafeAreaView>
       {/* Titles */}
