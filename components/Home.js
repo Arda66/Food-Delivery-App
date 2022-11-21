@@ -8,8 +8,10 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  TextInput,
+  TouchableWithoutFeedback,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import categoriesData from '../assets/data/categoriesData';
@@ -24,6 +26,9 @@ const Home = ({navigation}) => {
   const [FlatlistRenderer, setFlatlistRenderer] = useState(false);
   const [SelectedCategory, setSelectedCategory] = useState('Pizza');
   const [tempData, setTempData] = useState(PizzaData);
+  const [SearchText, setSearchText] = useState('');
+
+  const SearchRef = useRef(null);
   global.FavoriteData = [];
   const CategoryItemPress = item => {
     item.selected = true;
@@ -33,11 +38,10 @@ const Home = ({navigation}) => {
     });
     setFlatlistRenderer(!FlatlistRenderer);
   };
-  // useEffect(() => {
-  //   AsyncStorage.removeItem('FavoriteData');
-  // }, []);
+
   useEffect(() => {
     GetData();
+    setSearchText('');
   }, []);
   useEffect(() => {
     switch (SelectedCategory) {
@@ -60,9 +64,7 @@ const Home = ({navigation}) => {
   }, [FlatlistRenderer]);
   const GetData = () => {
     AsyncStorage.getItem('FavoriteData').then(value => {
-      if (value !== null) {
-        FavoriteData = JSON.parse(value);
-      }
+      value !== null && (FavoriteData = JSON.parse(value));
     });
   };
   const renderCategoryItem = ({item}) => {
@@ -152,9 +154,23 @@ const Home = ({navigation}) => {
         </View>
         {/* Search */}
         <View style={styles.searchWrapper}>
-          <Feather name="search" size={20} color={colors.textDark} />
+          <TouchableWithoutFeedback
+            onPress={() => {
+              SearchRef?.current?.focus();
+            }}>
+            <Feather name="search" size={20} color={colors.textDark} />
+          </TouchableWithoutFeedback>
           <View style={styles.search}>
-            <Text style={styles.searchText}>Search...</Text>
+            <TextInput
+              style={styles.searchText}
+              placeholder={'Search...'}
+              value={SearchText}
+              placeholderTextColor={colors.textLight}
+              onChangeText={text => setSearchText(text)}
+              autoComplete="off"
+              autoCapitalize="words"
+              ref={SearchRef}
+            />
           </View>
         </View>
         {/* Categories */}
@@ -176,66 +192,70 @@ const Home = ({navigation}) => {
           <Text style={styles.popularTitle}>Popular Food</Text>
           {tempData &&
             tempData.map(item => (
-              <TouchableOpacity
-                key={item.id}
-                onPress={() => {
-                  navigation.navigate('Details', {item: item});
-                }}>
-                <View
-                  style={[
-                    styles.popularCardWrapper,
-                    {
-                      marginTop: item.id == 1 ? 15 : 20,
-                      marginBottom: item.id == tempData.length ? 20 : 0, // last item
-                    },
-                  ]}>
-                  <View>
-                    <View>
-                      <View style={styles.popularTopWrapper}>
-                        <MaterialCommunityIcons
-                          name="crown"
-                          size={12}
-                          color={colors.primary}
-                        />
-                        <Text style={styles.popularTopText}>
-                          top of the week
-                        </Text>
+              <View style={{flex: 1}}>
+                {item.title.toLowerCase().includes(SearchText.toLowerCase()) ? (
+                  <TouchableOpacity
+                    key={item.id}
+                    onPress={() => {
+                      navigation.navigate('Details', {item: item});
+                    }}>
+                    <View
+                      style={[
+                        styles.popularCardWrapper,
+                        {
+                          marginTop: item.id == 1 ? 15 : 20,
+                          marginBottom: item.id == tempData.length ? 20 : 0, // last item
+                        },
+                      ]}>
+                      <View>
+                        <View>
+                          <View style={styles.popularTopWrapper}>
+                            <MaterialCommunityIcons
+                              name="crown"
+                              size={12}
+                              color={colors.primary}
+                            />
+                            <Text style={styles.popularTopText}>
+                              top of the week
+                            </Text>
+                          </View>
+                          <View style={styles.popularTitlesWrapper}>
+                            <Text style={styles.popularTitlesTitle}>
+                              {item.title}
+                            </Text>
+                            <Text style={styles.popularTitlesWeight}>
+                              Weight {item.weight}
+                            </Text>
+                          </View>
+                        </View>
+                        <View style={styles.popularCardBottom}>
+                          <View style={styles.addPizzaButton}>
+                            <Feather
+                              name="plus"
+                              size={10}
+                              color={colors.textDark}
+                            />
+                          </View>
+                          <View style={styles.ratingWrapper}>
+                            <MaterialCommunityIcons
+                              name="star"
+                              size={10}
+                              color={colors.textDark}
+                            />
+                            <Text style={styles.rating}>{item.rating}</Text>
+                          </View>
+                        </View>
                       </View>
-                      <View style={styles.popularTitlesWrapper}>
-                        <Text style={styles.popularTitlesTitle}>
-                          {item.title}
-                        </Text>
-                        <Text style={styles.popularTitlesWeight}>
-                          Weight {item.weight}
-                        </Text>
+                      <View style={styles.popularCardRight}>
+                        <Image
+                          style={styles.popularCardImage}
+                          source={item.image}
+                        />
                       </View>
                     </View>
-                    <View style={styles.popularCardBottom}>
-                      <View style={styles.addPizzaButton}>
-                        <Feather
-                          name="plus"
-                          size={10}
-                          color={colors.textDark}
-                        />
-                      </View>
-                      <View style={styles.ratingWrapper}>
-                        <MaterialCommunityIcons
-                          name="star"
-                          size={10}
-                          color={colors.textDark}
-                        />
-                        <Text style={styles.rating}>{item.rating}</Text>
-                      </View>
-                    </View>
-                  </View>
-                  <View style={styles.popularCardRight}>
-                    <Image
-                      style={styles.popularCardImage}
-                      source={item.image}
-                    />
-                  </View>
-                </View>
-              </TouchableOpacity>
+                  </TouchableOpacity>
+                ) : null}
+              </View>
             ))}
         </View>
       </ScrollView>
@@ -304,8 +324,7 @@ const styles = StyleSheet.create({
   searchText: {
     fontFamily: 'Montserrat-SemiBold',
     fontSize: 14,
-    color: colors.textLight,
-    marginBottom: 5,
+    color: colors.black,
   },
   categoriesWrapper: {
     marginTop: 30,
