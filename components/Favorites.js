@@ -42,96 +42,100 @@ const Favorites = ({navigation}) => {
     ]);
   };
 
-  const RenderFavoriteItem = ({item}) => {
+  const RenderFavoriteItem = ({item, index}) => {
     return (
-      <TouchableOpacity
-        onLongPress={() => {
-          RemoveItem(item.id);
-        }}
-        key={item.id}
-        onPress={() => {
-          navigation.navigate('Details', {item: item});
-        }}>
-        <View
-          style={[
-            styles.FavoriteCardWrapper,
-            {
-              marginTop: item.id == 1 ? 15 : 20,
-              marginBottom: item.id == FavoriteData.length ? 20 : 0, // last item
-            },
-          ]}>
-          <View>
+      <View>
+        <TouchableOpacity
+          onLongPress={() => {
+            RemoveItem(item.id);
+          }}
+          key={item.id}
+          onPress={() => {
+            navigation.navigate('Details', {item: item});
+          }}>
+          <View
+            style={[
+              styles.FavoriteCardWrapper,
+              {
+                marginTop: index == 0 ? 15 : 20,
+                marginBottom: index == FavoriteData.length - 1 ? 20 : 0, // last item
+              },
+            ]}>
             <View>
-              <View style={styles.FavoriteTopWrapper}>
-                <MaterialCommunityIcons
-                  name="crown"
-                  size={12}
-                  color={colors.primary}
-                />
-                <Text style={styles.FavoriteTopText}>top of the week</Text>
+              <View>
+                <View style={styles.FavoriteTopWrapper}>
+                  <MaterialCommunityIcons
+                    name="crown"
+                    size={12}
+                    color={colors.primary}
+                  />
+                  <Text style={styles.FavoriteTopText}>top of the week</Text>
+                </View>
+                <View style={styles.FavoriteTitlesWrapper}>
+                  <Text style={styles.FavoriteTitlesTitle}>{item.title}</Text>
+                  <Text style={styles.FavoriteTitlesWeight}>
+                    Weight {item.weight}
+                  </Text>
+                </View>
               </View>
-              <View style={styles.FavoriteTitlesWrapper}>
-                <Text style={styles.FavoriteTitlesTitle}>{item.title}</Text>
-                <Text style={styles.FavoriteTitlesWeight}>
-                  Weight {item.weight}
-                </Text>
+              <View style={styles.FavoriteCardBottom}>
+                <View style={styles.addPizzaButton}>
+                  <Feather name="plus" size={10} color={colors.textDark} />
+                </View>
+                <View style={styles.ratingWrapper}>
+                  <MaterialCommunityIcons
+                    name="star"
+                    size={10}
+                    color={colors.textDark}
+                  />
+                  <Text style={styles.rating}>{item.rating}</Text>
+                </View>
               </View>
             </View>
-            <View style={styles.FavoriteCardBottom}>
-              <View style={styles.addPizzaButton}>
-                <Feather name="plus" size={10} color={colors.textDark} />
-              </View>
-              <View style={styles.ratingWrapper}>
-                <MaterialCommunityIcons
-                  name="star"
-                  size={10}
-                  color={colors.textDark}
-                />
-                <Text style={styles.rating}>{item.rating}</Text>
-              </View>
+            <View style={styles.FavoriteCardRight}>
+              <Image style={styles.FavoriteCardImage} source={item.image} />
             </View>
           </View>
-          <View style={styles.FavoriteCardRight}>
-            <Image style={styles.FavoriteCardImage} source={item.image} />
-          </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     );
   };
   return (
-    <View>
-      <View style={styles.FavoriteWrapper}>
-        {FavoriteData ? (
-          <View>
-            <Text style={styles.FavoriteTitle}>Favorite Food</Text>
-            <FlatList
-              extraData={FlatlistRenderer}
-              data={FavoriteData}
-              renderItem={RenderFavoriteItem}
-              keyExtractor={item => item.id}
-              showsVerticalScrollIndicator={false}
-            />
-          </View>
-        ) : (
-          <View
-            style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-            <Text
-              style={[
-                styles.FavoriteTitle,
-                {fontSize: 32, fontWeight: 'bold', color: 'black'},
-              ]}>
-              No Favorite Food in the List
-            </Text>
-            <Text
-              style={[
-                styles.FavoriteTitle,
-                {fontSize: 32, fontWeight: 'bold', color: 'black'},
-              ]}>
-              Please add some food to the list
-            </Text>
-          </View>
-        )}
-      </View>
+    <View style={styles.FavoriteWrapper}>
+      {FavoriteData.length > 0 ? (
+        <View style={{flex: 1}}>
+          <Text style={styles.FavoriteTitle}>Favorite Food</Text>
+          <FlatList
+            extraData={FlatlistRenderer}
+            data={FavoriteData}
+            renderItem={RenderFavoriteItem}
+            keyExtractor={item => item.id}
+            showsVerticalScrollIndicator={false}
+          />
+        </View>
+      ) : (
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <Text
+            style={[
+              styles.FavoriteTitle,
+              {fontSize: 32, fontWeight: 'bold', color: colors.secondary},
+            ]}>
+            No Favorite Food in the List
+          </Text>
+          <Text
+            style={[
+              styles.FavoriteTitle,
+              {
+                marginTop: 40,
+                fontSize: 26,
+                fontWeight: 'bold',
+                color: colors.textDark,
+              },
+            ]}>
+            Please, first add some food to the list!
+          </Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -141,6 +145,7 @@ export default Favorites;
 const styles = StyleSheet.create({
   FavoriteWrapper: {
     paddingHorizontal: 20,
+    flex: 1,
   },
   FavoriteTitle: {
     marginTop: 10,

@@ -7,6 +7,7 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
@@ -28,9 +29,7 @@ const Home = ({navigation}) => {
     item.selected = true;
     setSelectedCategory(item.title);
     categoriesData.map(category => {
-      if (category.id != item.id) {
-        category.selected = false;
-      }
+      category.id != item.id && (category.selected = false);
     });
     setFlatlistRenderer(!FlatlistRenderer);
   };
@@ -48,7 +47,7 @@ const Home = ({navigation}) => {
       case 'Hamburger':
         setTempData(HamburgerData);
         return;
-      case 'SeaFood':
+      case 'Seafood':
         setTempData(SeafoodData);
         return;
       case 'Dessert':
@@ -122,7 +121,24 @@ const Home = ({navigation}) => {
             <Text style={styles.titlesSubtitle}>Food</Text>
             <Text style={styles.titlesTitle}>Menu</Text>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
+          <TouchableOpacity
+            onLongPress={() => {
+              Alert.alert('Delete All Favorites', 'Are you sure?', [
+                {
+                  text: 'Cancel',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+                },
+                {
+                  text: 'OK',
+                  onPress: () => {
+                    AsyncStorage.removeItem('FavoriteData');
+                    FavoriteData = [];
+                  },
+                },
+              ]);
+            }}
+            onPress={() => navigation.navigate('Favorites')}>
             <View style={styles.titlesFavoriteWrapper}>
               <Text style={styles.titlesFavorite}>Favorites</Text>
               <MaterialCommunityIcons

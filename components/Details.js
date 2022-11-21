@@ -40,8 +40,9 @@ const Details = ({navigation, route}) => {
     if (isItemInArray) {
       alert('Already in the favorite list');
     } else {
-      item.id = Math.floor(Math.random() * 1000);
-      FavoriteData.push(item);
+      const newItem = item;
+      newItem.id = Math.floor(Math.random() * 1000);
+      FavoriteData.push(newItem);
       AsyncStorage.setItem('FavoriteData', JSON.stringify(FavoriteData));
       Alert.alert(
         'Added successfully!',
@@ -88,8 +89,13 @@ const Details = ({navigation, route}) => {
                 <Text>{item.sizeNumber}''</Text>
               ) : null}
             </Text>
-            <Text style={styles.SubTitleLightText}>Crust</Text>
-            <Text style={styles.SubTitleDarkText}>{item.crust}</Text>
+            {item.title.includes('Pizza') ? (
+              <View>
+                <Text style={styles.SubTitleLightText}>Crust</Text>
+                <Text style={styles.SubTitleDarkText}>{item.crust}</Text>
+              </View>
+            ) : null}
+
             <Text style={styles.SubTitleLightText}>Delivery in</Text>
             <Text style={styles.SubTitleDarkText}>{item.deliveryTime} min</Text>
           </View>
@@ -167,7 +173,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     fontFamily: 'Montserrat-Bold',
     color: colors.textDark,
-    width: '50%',
+    width: '75%',
     fontSize: 32,
   },
   productPrice: {
@@ -253,7 +259,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     borderRadius: 50,
     shadowColor: colors.black,
-    marginTop: 30,
+    marginTop: 70,
     shadowOffset: {
       width: 0,
       height: 2,
