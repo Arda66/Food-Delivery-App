@@ -7,8 +7,6 @@ const HamburgerData = [
     rating: '4.5',
     price: 9.99,
     sizeName: 'Large',
-    sizeNumber: 14,
-    crust: 'Thin Crust',
     deliveryTime: 30,
     ingredients: [
       {
@@ -46,8 +44,6 @@ const HamburgerData = [
     rating: '4.0',
     price: 7.99,
     sizeName: 'Small',
-    sizeNumber: 10,
-    crust: 'Thick Crust',
     deliveryTime: 30,
     ingredients: [
       {
@@ -70,6 +66,11 @@ const HamburgerData = [
         name: 'tomato',
         image: require('../images/burgerImages/tomato.png'),
       },
+      {
+        id: '5',
+        name: 'onion',
+        image: require('../images/burgerImages/onion.png'),
+      },
     ],
   },
   {
@@ -80,8 +81,6 @@ const HamburgerData = [
     rating: '4.7',
     price: 12.99,
     sizeName: 'Large',
-    sizeNumber: 18,
-    crust: 'Thin Crust',
     deliveryTime: 20,
     ingredients: [
       {
@@ -114,8 +113,6 @@ const HamburgerData = [
     rating: '4.8',
     price: 12.99,
     sizeName: 'Extra Large',
-    sizeNumber: 20,
-    crust: 'Thick Parmesan Crust',
     deliveryTime: 40,
     ingredients: [
       {
@@ -139,8 +136,6 @@ const HamburgerData = [
     rating: '5.0',
     price: 19.99,
     sizeName: 'XXL',
-    sizeNumber: 25,
-    crust: 'Thick Crust',
     deliveryTime: 50,
     ingredients: [
       {

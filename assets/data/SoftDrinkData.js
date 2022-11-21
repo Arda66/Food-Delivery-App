@@ -2,13 +2,11 @@ const SoftDrinkData = [
   {
     id: '1',
     // image: require('../images/softdrinkImages/'),
-    title: 'Pepperoni Pizza',
+    title: '',
     weight: '540 gr',
     rating: '4.5',
     price: 4.99,
     sizeName: 'Medium',
-    sizeNumber: 14,
-    crust: 'Thin Crust',
     deliveryTime: 20,
     ingredients: [
       {
@@ -36,13 +34,11 @@ const SoftDrinkData = [
   {
     id: '2',
     // image: require('../images/softdrinkImages/'),
-    title: 'Margarita Pizza',
+    title: '',
     weight: '450 gr',
     rating: '4.0',
     price: 5.99,
     sizeName: 'Small',
-    sizeNumber: 10,
-    crust: 'Thick Crust',
     deliveryTime: 30,
     ingredients: [
       {
@@ -60,13 +56,11 @@ const SoftDrinkData = [
   {
     id: '3',
     // image: require('../images/softdrinkImages/'),
-    title: 'Vegan Pizza',
+    title: '',
     weight: '700 gr',
     rating: '4.7',
     price: 9.99,
     sizeName: 'Large',
-    sizeNumber: 18,
-    crust: 'Thin Crust',
     deliveryTime: 20,
     ingredients: [
       {
@@ -84,13 +78,11 @@ const SoftDrinkData = [
   {
     id: '4',
     // image: require('../images/softdrinkImages/'),
-    title: 'Special Pizza',
+    title: '',
     weight: '900 gr',
     rating: '4.8',
     price: 12.99,
     sizeName: 'Extra Large',
-    sizeNumber: 20,
-    crust: 'Thick Parmesan Crust',
     deliveryTime: 40,
     ingredients: [
       {
@@ -118,13 +110,11 @@ const SoftDrinkData = [
   {
     id: '5',
     // image: require('../images/softdrinkImages/'),
-    title: 'Full Mixed Pizza',
+    title: '',
     weight: '1000 gr',
     rating: '5.0',
     price: 19.99,
     sizeName: 'XXL',
-    sizeNumber: 25,
-    crust: 'Thick Crust',
     deliveryTime: 50,
     ingredients: [
       {
