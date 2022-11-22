@@ -19,8 +19,6 @@ const Details = ({navigation, route}) => {
     // Initialize the data
     AsyncStorage.getItem('FavoriteData').then(value => {
       value !== null && (FavoriteData = JSON.parse(value));
-      console.log('Value', value);
-      console.log('FavoriteData', FavoriteData);
     });
   }, []);
 

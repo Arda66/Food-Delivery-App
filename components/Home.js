@@ -10,6 +10,7 @@ import {
   Alert,
   TextInput,
   TouchableWithoutFeedback,
+  ToastAndroid,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
@@ -27,7 +28,6 @@ const Home = ({navigation}) => {
   const [SelectedCategory, setSelectedCategory] = useState('Pizza');
   const [tempData, setTempData] = useState(PizzaData);
   const [SearchText, setSearchText] = useState('');
-
   const SearchRef = useRef(null);
   global.FavoriteData = [];
   const CategoryItemPress = item => {
@@ -128,7 +128,8 @@ const Home = ({navigation}) => {
               Alert.alert('Delete All Favorites', 'Are you sure?', [
                 {
                   text: 'Cancel',
-                  onPress: () => console.log('Cancel Pressed'),
+                  onPress: () =>
+                    ToastAndroid.show('Canceled', ToastAndroid.SHORT),
                   style: 'cancel',
                 },
                 {
@@ -163,7 +164,7 @@ const Home = ({navigation}) => {
           <View style={styles.search}>
             <TextInput
               style={styles.searchText}
-              placeholder={'Search...'}
+              placeholder="Search..."
               value={SearchText}
               placeholderTextColor={colors.textLight}
               onChangeText={text => setSearchText(text)}
@@ -191,11 +192,10 @@ const Home = ({navigation}) => {
         <View style={styles.popularWrapper}>
           <Text style={styles.popularTitle}>Popular Food</Text>
           {tempData &&
-            tempData.map(item => (
-              <View style={{flex: 1}}>
+            tempData.map((item, index) => (
+              <View key={item.id} style={{flex: 1}}>
                 {item.title.toLowerCase().includes(SearchText.toLowerCase()) ? (
                   <TouchableOpacity
-                    key={item.id}
                     onPress={() => {
                       navigation.navigate('Details', {item: item});
                     }}>
@@ -204,7 +204,7 @@ const Home = ({navigation}) => {
                         styles.popularCardWrapper,
                         {
                           marginTop: item.id == 1 ? 15 : 20,
-                          marginBottom: item.id == tempData.length ? 20 : 0, // last item
+                          marginBottom: index === tempData.length - 1 ? 20 : 0, // last item
                         },
                       ]}>
                       <View>
