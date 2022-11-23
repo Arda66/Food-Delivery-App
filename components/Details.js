@@ -202,7 +202,6 @@ const styles = StyleSheet.create({
   productMiddleLeft: {
     paddingLeft: 20,
   },
-
   ProductImage: {
     alignSelf: 'center',
     left: 40,

@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Details from './components/Details';
 import Favorites from './components/Favorites';
 import Orders from './components/Orders';
+import Payment from './components/Payment';
 const App = () => {
   const Stack = createNativeStackNavigator();
   global.OrdersData = [];
@@ -27,6 +28,7 @@ const App = () => {
         />
         <Stack.Screen name="Favorites" component={Favorites} />
         <Stack.Screen name="Orders" component={Orders} />
+        <Stack.Screen name="Payment" component={Payment} />
       </Stack.Navigator>
     </NavigationContainer>
   );
