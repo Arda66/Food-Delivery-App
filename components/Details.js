@@ -26,6 +26,7 @@ const Details = ({navigation, route}) => {
     return (
       <View style={styles.IngredientsCardItem}>
         <Image style={styles.ingredientsImage} source={item.image} />
+        <Text style={styles.IngredientsCardName}>{item.name}</Text>
       </View>
     );
   };
@@ -93,7 +94,6 @@ const Details = ({navigation, route}) => {
                 <Text style={styles.SubTitleDarkText}>{item.crust}</Text>
               </View>
             ) : null}
-
             <Text style={styles.SubTitleLightText}>Delivery in</Text>
             <Text style={styles.SubTitleDarkText}>{item.deliveryTime} min</Text>
           </View>
@@ -116,6 +116,7 @@ const Details = ({navigation, route}) => {
         </View>
       </View>
       <TouchableOpacity
+        style={{flex: 1, justifyContent: 'center'}}
         onPress={() => {
           Alert.alert(
             'Order Placed Successfully!',
@@ -212,6 +213,7 @@ const styles = StyleSheet.create({
   IngredientsWrapper: {
     paddingLeft: 20,
     marginTop: 40,
+    flex: 1,
   },
   IngredientsTitle: {
     fontFamily: 'Montserrat-Bold',
@@ -219,7 +221,7 @@ const styles = StyleSheet.create({
     color: colors.black,
   },
   IngredientsListWrapper: {
-    paddingVertical: 20,
+    paddingTop: 20,
   },
   ingredientsImage: {
     width: 82,
@@ -242,11 +244,19 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 3,
   },
+  IngredientsCardName: {
+    fontFamily: 'Montserrat-Medium',
+    fontSize: 14,
+    color: colors.textDark,
+    textAlign: 'center',
+    marginTop: 5,
+  },
   buttonText: {
     marginRight: 10,
     color: colors.black,
     fontSize: 14,
     fontFamily: 'Montserrat-Bold',
+    fontWeight: 'bold',
     paddingVertical: 23,
   },
   buttonTextWrapper: {

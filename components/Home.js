@@ -11,6 +11,7 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   ToastAndroid,
+  TouchableHighlight,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';

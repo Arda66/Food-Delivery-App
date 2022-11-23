@@ -120,7 +120,7 @@ const Favorites = ({navigation}) => {
               styles.FavoriteTitle,
               {fontSize: 32, fontWeight: 'bold', color: colors.secondary},
             ]}>
-            No Favorite Food in the List
+            Favorite Food List is empty!
           </Text>
           <Text
             style={[
@@ -132,7 +132,7 @@ const Favorites = ({navigation}) => {
                 color: colors.textDark,
               },
             ]}>
-            Please, first add some food to the list!
+            Lets add some food to the list!
           </Text>
         </View>
       )}
