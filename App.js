@@ -4,8 +4,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './components/Home';
 import Details from './components/Details';
 import Favorites from './components/Favorites';
+import Orders from './components/Orders';
 const App = () => {
   const Stack = createNativeStackNavigator();
+  global.OrdersData = [];
+  global.FavoriteData = [];
 
   return (
     <NavigationContainer>
@@ -23,6 +26,7 @@ const App = () => {
           component={Details}
         />
         <Stack.Screen name="Favorites" component={Favorites} />
+        <Stack.Screen name="Orders" component={Orders} />
       </Stack.Navigator>
     </NavigationContainer>
   );

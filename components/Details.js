@@ -60,6 +60,29 @@ const Details = ({navigation, route}) => {
     }
   };
 
+  const PlaceOrder = () => {
+    // Check if the item is already in the array
+    const isItemInArray = OrdersData.some(
+      arrayItem => arrayItem.title === item.title,
+    );
+    if (isItemInArray) {
+      alert('This menu is already ordered!');
+    } else {
+      const newItem = item;
+      newItem.id = Math.floor(Math.random() * 1000);
+      OrdersData.push(newItem);
+      Alert.alert('Order Placed Successfully!', 'Your order is on the way.', [
+        {
+          text: 'Close',
+          onPress: () => navigation.navigate('Home'),
+        },
+        {
+          text: 'Go to Orders page',
+          onPress: () => navigation.navigate('Orders'),
+        },
+      ]);
+    }
+  };
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -117,18 +140,7 @@ const Details = ({navigation, route}) => {
       </View>
       <TouchableOpacity
         style={{flex: 1, justifyContent: 'center'}}
-        onPress={() => {
-          Alert.alert(
-            'Order Placed Successfully!',
-            'Your order is on the way.',
-            [
-              {
-                text: 'OK',
-                onPress: () => navigation.navigate('Home'),
-              },
-            ],
-          );
-        }}>
+        onPress={() => PlaceOrder()}>
         <View style={styles.buttonTextWrapper}>
           <Text style={styles.buttonText}>Place an order</Text>
           <Feather name="chevron-right" size={16} color={colors.black} />

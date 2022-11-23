@@ -16,6 +16,7 @@ import {
 import React, {useEffect, useRef, useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import categoriesData from '../assets/data/categoriesData';
 import colors from '../assets/colors/colors';
 import PizzaData from '../assets/data/PizzaData';
@@ -24,13 +25,13 @@ import HamburgerData from '../assets/data/HamburgerData';
 import DessertData from '../assets/data/DessertData';
 import SoftDrinkData from '../assets/data/SoftDrinkData';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {isSearchBarAvailableForCurrentPlatform} from 'react-native-screens';
 const Home = ({navigation}) => {
   const [FlatlistRenderer, setFlatlistRenderer] = useState(false);
   const [SelectedCategory, setSelectedCategory] = useState('Pizza');
   const [tempData, setTempData] = useState(PizzaData);
   const [SearchText, setSearchText] = useState('');
   const SearchRef = useRef(null);
-  global.FavoriteData = [];
   const CategoryItemPress = item => {
     item.selected = true;
     setSelectedCategory(item.title);
@@ -112,7 +113,43 @@ const Home = ({navigation}) => {
             source={require('../assets/images/profile.png')}
             style={styles.profileImage}
           />
-          {/* <Feather name="menu" size={24} color={colors.black} /> */}
+          <View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Orders')}
+              onLongPress={() => {
+                Alert.alert('Canceling All Orders!', 'Are you sure?', [
+                  {
+                    text: 'Not Cancel',
+                    onPress: () => null,
+                    style: 'cancel',
+                  },
+                  {
+                    text: 'Cancel',
+                    onPress: () => {
+                      OrdersData = [];
+                      ToastAndroid.show(
+                        'All orders deleted!',
+                        ToastAndroid.SHORT,
+                      );
+                    },
+                  },
+                ]);
+              }}
+              style={{justifyContent: 'center', alignItems: 'center'}}>
+              <MaterialIcons
+                name="delivery-dining"
+                size={26}
+                color={colors.price}
+              />
+              <Text
+                style={{
+                  color: colors.price,
+                  fontFamily: 'Montserrat-SemiBold',
+                }}>
+                Orders
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </SafeAreaView>
       {/* Titles */}
