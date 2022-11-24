@@ -11,7 +11,6 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   ToastAndroid,
-  TouchableHighlight,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
@@ -25,13 +24,15 @@ import HamburgerData from '../assets/data/HamburgerData';
 import DessertData from '../assets/data/DessertData';
 import SoftDrinkData from '../assets/data/SoftDrinkData';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {isSearchBarAvailableForCurrentPlatform} from 'react-native-screens';
+
 const Home = ({navigation}) => {
   const [FlatlistRenderer, setFlatlistRenderer] = useState(false);
   const [SelectedCategory, setSelectedCategory] = useState('Pizza');
   const [tempData, setTempData] = useState(PizzaData);
   const [SearchText, setSearchText] = useState('');
+
   const SearchRef = useRef(null);
+
   const CategoryItemPress = item => {
     item.selected = true;
     setSelectedCategory(item.title);
@@ -45,6 +46,7 @@ const Home = ({navigation}) => {
     GetData();
     setSearchText('');
   }, []);
+
   useEffect(() => {
     switch (SelectedCategory) {
       case 'Pizza':
@@ -64,6 +66,7 @@ const Home = ({navigation}) => {
         return;
     }
   }, [FlatlistRenderer]);
+
   const GetData = () => {
     AsyncStorage.getItem('FavoriteData').then(value => {
       value !== null && (FavoriteData = JSON.parse(value));
@@ -235,7 +238,10 @@ const Home = ({navigation}) => {
                 {item.title.toLowerCase().includes(SearchText.toLowerCase()) ? (
                   <TouchableOpacity
                     onPress={() => {
-                      navigation.navigate('Details', {item: item});
+                      navigation.navigate('Details', {
+                        item: item,
+                        SelectedCategory: SelectedCategory,
+                      });
                     }}>
                     <View
                       style={[

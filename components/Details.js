@@ -12,8 +12,9 @@ import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../assets/colors/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const Details = ({navigation, route}) => {
-  const {item} = route.params;
+  const {item, SelectedCategory} = route.params;
 
   useEffect(() => {
     // Initialize the data
@@ -36,9 +37,8 @@ const Details = ({navigation, route}) => {
     const isItemInArray = FavoriteData.some(
       arrayItem => arrayItem.title === item.title,
     );
-    if (isItemInArray) {
-      alert('Already in the favorite list');
-    } else {
+    if (isItemInArray) alert('Already in the favorite list');
+    else {
       const newItem = item;
       newItem.id = Math.floor(Math.random() * 1000);
       FavoriteData.push(newItem);
@@ -65,9 +65,8 @@ const Details = ({navigation, route}) => {
     const isItemInArray = OrdersData.some(
       arrayItem => arrayItem.title === item.title,
     );
-    if (isItemInArray) {
-      alert('This menu is already ordered!');
-    } else {
+    if (isItemInArray) alert('This menu is already ordered!');
+    else {
       const newItem = item;
       newItem.id = Math.floor(Math.random() * 1000);
       OrdersData.push(newItem);
@@ -126,18 +125,22 @@ const Details = ({navigation, route}) => {
         </View>
       </View>
       {/* Ingredients */}
-      <View style={styles.IngredientsWrapper}>
-        <Text style={styles.IngredientsTitle}>Ingredients</Text>
-        <View style={styles.IngredientsListWrapper}>
-          <FlatList
-            data={item.ingredients}
-            renderItem={renderDetailsItem}
-            keyExtractor={item => item.id}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          />
+      {SelectedCategory !== 'Soft Drinks' ? (
+        <View style={styles.IngredientsWrapper}>
+          <Text style={styles.IngredientsTitle}>Ingredients</Text>
+          <View style={styles.IngredientsListWrapper}>
+            <FlatList
+              data={item.ingredients}
+              renderItem={renderDetailsItem}
+              keyExtractor={item => item.id}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
         </View>
-      </View>
+      ) : (
+        <View style={styles.IngredientsWrapper}></View>
+      )}
       <TouchableOpacity
         style={{flex: 1, justifyContent: 'center'}}
         onPress={() => PlaceOrder()}>

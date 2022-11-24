@@ -6,15 +6,12 @@ import {
   ToastAndroid,
   TouchableOpacity,
   View,
-  Image,
-  Button,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import colors from '../assets/colors/colors';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import CardComponent from './CardComponent';
 const Orders = ({navigation}) => {
   const [FlatlistRenderer, setFlatlistRenderer] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -54,49 +51,7 @@ const Orders = ({navigation}) => {
           onPress={() => {
             navigation.navigate('Details', {item: item});
           }}>
-          <View
-            style={[
-              styles.OrderCardWrapper,
-              {
-                marginTop: index == 0 ? 15 : 20,
-                marginBottom: index == OrdersData.length - 1 ? 20 : 0, // last item
-              },
-            ]}>
-            <View>
-              <View>
-                <View style={styles.OrderTopWrapper}>
-                  <MaterialCommunityIcons
-                    name="crown"
-                    size={12}
-                    color={colors.primary}
-                  />
-                  <Text style={styles.OrderTopText}>top of the week</Text>
-                </View>
-                <View style={styles.OrderTitlesWrapper}>
-                  <Text style={styles.OrderTitlesTitle}>{item.title}</Text>
-                  <Text style={styles.OrderTitlesWeight}>
-                    Weight {item.weight}
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.OrderCardBottom}>
-                <View style={styles.addPizzaButton}>
-                  <Feather name="plus" size={10} color={colors.textDark} />
-                </View>
-                <View style={styles.ratingWrapper}>
-                  <MaterialCommunityIcons
-                    name="star"
-                    size={10}
-                    color={colors.textDark}
-                  />
-                  <Text style={styles.rating}>{item.rating}</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.OrderCardRight}>
-              <Image style={styles.OrderCardImage} source={item.image} />
-            </View>
-          </View>
+          <CardComponent item={item} index={index} ArrayData={OrdersData} />
         </TouchableOpacity>
       </View>
     );
@@ -196,87 +151,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-Bold',
     textAlign: 'center',
   },
-  OrderCardWrapper: {
-    backgroundColor: colors.white,
-    borderRadius: 25,
-    paddingTop: 20,
-    paddingLeft: 20,
-    flexDirection: 'row',
-    overflow: 'hidden',
-    shadowColor: colors.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 2,
-  },
-  OrderTopWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  OrderTopText: {
-    marginLeft: 10,
-    fontFamily: 'Montserrat-SemiBold',
-    fontSize: 14,
-    color: 'black',
-  },
-  OrderTitlesWrapper: {
-    marginTop: 20,
-  },
-  OrderTitlesTitle: {
-    fontSize: 14,
-    fontFamily: 'Montserrat-SemiBold',
-    color: colors.textDark,
-  },
-  OrderTitlesWeight: {
-    fontFamily: 'Montserrat-Medium',
-    fontSize: 12,
-    color: colors.textLight,
-    marginTop: 5,
-  },
-  OrderCardBottom: {
-    marginTop: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  addPizzaButton: {
-    backgroundColor: colors.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: -20,
-    borderBottomLeftRadius: 25,
-    borderTopRightRadius: 25,
-    paddingVertical: 20,
-    paddingHorizontal: 40,
-  },
-  PayButton: {},
-  ratingWrapper: {
-    marginLeft: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  rating: {
-    color: colors.black,
-    fontFamily: 'Montserrat-SemiBold',
-    marginLeft: 5,
-    fontSize: 12,
-  },
-  OrderCardRight: {
-    marginLeft: 40,
-  },
   totalPrice: {
     fontSize: 30,
     textAlign: 'center',
     color: colors.price,
     fontFamily: 'Montserrat-SemiBold',
     marginVertical: 30,
-  },
-  OrderCardImage: {
-    width: 210,
-    height: 125,
-    resizeMode: 'contain',
   },
   buttonText: {
     marginRight: 50,
