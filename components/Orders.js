@@ -17,10 +17,9 @@ const Orders = ({navigation}) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    var price = 0;
+    let price = 0;
     OrdersData.map(item => (price += item.price));
     setTotalPrice(price.toFixed(2));
-    console.log('Price : ', totalPrice);
   });
 
   const RemoveItem = (price, id) => {

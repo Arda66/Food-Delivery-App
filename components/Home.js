@@ -24,6 +24,7 @@ import HamburgerData from '../assets/data/HamburgerData';
 import DessertData from '../assets/data/DessertData';
 import SoftDrinkData from '../assets/data/SoftDrinkData';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CardComponent from './CardComponent';
 
 const Home = ({navigation}) => {
   const [FlatlistRenderer, setFlatlistRenderer] = useState(false);
@@ -240,63 +241,13 @@ const Home = ({navigation}) => {
                     onPress={() => {
                       navigation.navigate('Details', {
                         item: item,
-                        SelectedCategory: SelectedCategory,
                       });
                     }}>
-                    <View
-                      style={[
-                        styles.popularCardWrapper,
-                        {
-                          marginTop: item.id == 1 ? 15 : 20,
-                          marginBottom: index === tempData.length - 1 ? 20 : 0, // last item
-                        },
-                      ]}>
-                      <View>
-                        <View>
-                          <View style={styles.popularTopWrapper}>
-                            <MaterialCommunityIcons
-                              name="crown"
-                              size={12}
-                              color={colors.primary}
-                            />
-                            <Text style={styles.popularTopText}>
-                              top of the week
-                            </Text>
-                          </View>
-                          <View style={styles.popularTitlesWrapper}>
-                            <Text style={styles.popularTitlesTitle}>
-                              {item.title}
-                            </Text>
-                            <Text style={styles.popularTitlesWeight}>
-                              Weight {item.weight}
-                            </Text>
-                          </View>
-                        </View>
-                        <View style={styles.popularCardBottom}>
-                          <View style={styles.addPizzaButton}>
-                            <Feather
-                              name="plus"
-                              size={10}
-                              color={colors.textDark}
-                            />
-                          </View>
-                          <View style={styles.ratingWrapper}>
-                            <MaterialCommunityIcons
-                              name="star"
-                              size={10}
-                              color={colors.textDark}
-                            />
-                            <Text style={styles.rating}>{item.rating}</Text>
-                          </View>
-                        </View>
-                      </View>
-                      <View style={styles.popularCardRight}>
-                        <Image
-                          style={styles.popularCardImage}
-                          source={item.image}
-                        />
-                      </View>
-                    </View>
+                    <CardComponent
+                      item={item}
+                      index={index}
+                      ArrayData={tempData}
+                    />
                   </TouchableOpacity>
                 ) : null}
               </View>
@@ -426,80 +377,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Montserrat-Bold',
     color: 'black',
-  },
-  popularCardWrapper: {
-    backgroundColor: colors.white,
-    borderRadius: 25,
-    paddingTop: 20,
-    paddingLeft: 20,
-    flexDirection: 'row',
-    overflow: 'hidden',
-    shadowColor: colors.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 2,
-  },
-  popularTopWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  popularTopText: {
-    marginLeft: 10,
-    fontFamily: 'Montserrat-SemiBold',
-    fontSize: 14,
-    color: 'black',
-  },
-  popularTitlesWrapper: {
-    marginTop: 20,
-  },
-  popularTitlesTitle: {
-    fontSize: 14,
-    fontFamily: 'Montserrat-SemiBold',
-    color: colors.textDark,
-  },
-  popularTitlesWeight: {
-    fontFamily: 'Montserrat-Medium',
-    fontSize: 12,
-    color: colors.textLight,
-    marginTop: 5,
-  },
-  popularCardBottom: {
-    marginTop: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  addPizzaButton: {
-    backgroundColor: colors.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: -20,
-    borderBottomLeftRadius: 25,
-    borderTopRightRadius: 25,
-    paddingVertical: 20,
-    paddingHorizontal: 40,
-  },
-  ratingWrapper: {
-    marginLeft: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  rating: {
-    color: colors.black,
-    fontFamily: 'Montserrat-SemiBold',
-    marginLeft: 5,
-    fontSize: 12,
-  },
-  popularCardRight: {
-    marginLeft: 40,
-  },
-  popularCardImage: {
-    width: 210,
-    height: 125,
-    resizeMode: 'contain',
   },
 });
 export default Home;

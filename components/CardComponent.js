@@ -10,7 +10,7 @@ const CardComponent = ({item, index, ArrayData}) => {
       style={[
         styles.CardWrapper,
         {
-          marginTop: index == 0 ? 15 : 20,
+          marginTop: index == 0 ? 15 : 20, // first item
           marginBottom: index == ArrayData.length - 1 ? 20 : 0, // last item
         },
       ]}>

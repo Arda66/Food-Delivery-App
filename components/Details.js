@@ -14,7 +14,7 @@ import colors from '../assets/colors/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Details = ({navigation, route}) => {
-  const {item, SelectedCategory} = route.params;
+  const {item} = route.params;
 
   useEffect(() => {
     // Initialize the data
@@ -125,7 +125,7 @@ const Details = ({navigation, route}) => {
         </View>
       </View>
       {/* Ingredients */}
-      {SelectedCategory !== 'Soft Drinks' ? (
+      {item.ingredients !== undefined ? (
         <View style={styles.IngredientsWrapper}>
           <Text style={styles.IngredientsTitle}>Ingredients</Text>
           <View style={styles.IngredientsListWrapper}>
