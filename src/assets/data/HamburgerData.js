@@ -120,7 +120,6 @@ const HamburgerData = [
         name: 'chicken',
         image: require('../images/burgerImages/chicken.png'),
       },
-
       {
         id: '2',
         name: 'onion',

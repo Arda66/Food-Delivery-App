@@ -16,7 +16,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import categoriesData from '../assets/data/categoriesData';
+import categoriesData from '../assets/data/CategoriesData';
 import colors from '../assets/colors/colors';
 import PizzaData from '../assets/data/PizzaData';
 import SeafoodData from '../assets/data/SeafoodData';
@@ -24,7 +24,7 @@ import HamburgerData from '../assets/data/HamburgerData';
 import DessertData from '../assets/data/DessertData';
 import SoftDrinkData from '../assets/data/SoftDrinkData';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import CardComponent from './CardComponent';
+import CardComponent from '../components/CardComponent';
 
 const Home = ({navigation}) => {
   const [FlatlistRenderer, setFlatlistRenderer] = useState(false);

@@ -10,7 +10,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import colors from '../assets/colors/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import CardComponent from './CardComponent';
+import CardComponent from '../components/CardComponent';
 
 const Favorites = ({navigation}) => {
   const [FlatlistRenderer, setFlatlistRenderer] = useState(false);

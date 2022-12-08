@@ -1,11 +1,11 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Home from './components/Home';
-import Details from './components/Details';
-import Favorites from './components/Favorites';
-import Orders from './components/Orders';
-import Payment from './components/Payment';
+import Home from './src/screens/Home';
+import Details from './src/screens/Details';
+import Favorites from './src/screens/Favorites';
+import Orders from './src/screens/Orders';
+import Payment from './src/screens/Payment';
 const App = () => {
   const Stack = createNativeStackNavigator();
   global.OrdersData = [];

@@ -11,7 +11,7 @@ import React, {useEffect, useState} from 'react';
 import colors from '../assets/colors/colors';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import CardComponent from './CardComponent';
+import CardComponent from '../components/CardComponent';
 const Orders = ({navigation}) => {
   const [FlatlistRenderer, setFlatlistRenderer] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
