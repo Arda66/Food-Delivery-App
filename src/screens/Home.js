@@ -70,7 +70,7 @@ const Home = ({navigation}) => {
 
   const GetData = () => {
     AsyncStorage.getItem('FavoriteData').then(value => {
-      value !== null && (FavoriteData = JSON.parse(value));
+      value && (FavoriteData = JSON.parse(value));
     });
   };
   const renderCategoryItem = ({item}) => {

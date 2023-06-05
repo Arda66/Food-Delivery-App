@@ -17,7 +17,7 @@ const Favorites = ({navigation}) => {
 
   useEffect(() => {
     AsyncStorage.getItem('FavoriteData').then(value => {
-      value !== null && (FavoriteData = JSON.parse(value));
+      value && (FavoriteData = JSON.parse(value));
     });
   }, []);
 

@@ -19,7 +19,7 @@ const Details = ({navigation, route}) => {
   useEffect(() => {
     // Initialize the data
     AsyncStorage.getItem('FavoriteData').then(value => {
-      value !== null && (FavoriteData = JSON.parse(value));
+      value && (FavoriteData = JSON.parse(value));
     });
   }, []);
 
@@ -40,7 +40,7 @@ const Details = ({navigation, route}) => {
     if (isItemInArray) alert('Already in the favorite list');
     else {
       const newItem = item;
-      newItem.id = Math.floor(Math.random() * 1000);
+      newItem.id = Math.floor(Math.random() * 10000);
       FavoriteData.push(newItem);
       AsyncStorage.setItem('FavoriteData', JSON.stringify(FavoriteData));
       Alert.alert(
@@ -68,7 +68,7 @@ const Details = ({navigation, route}) => {
     if (isItemInArray) alert('This menu is already ordered!');
     else {
       const newItem = item;
-      newItem.id = Math.floor(Math.random() * 1000);
+      newItem.id = Math.floor(Math.random() * 10000);
       OrdersData.push(newItem);
       Alert.alert('Order Placed Successfully!', 'Your order is on the way.', [
         {
